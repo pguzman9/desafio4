@@ -9,6 +9,8 @@ class Libreria {
         this.init()
     }
 
+    static error1 = {error: "Producto no encontrado"}
+
     init() {
         console.log(`Loading ${this.filename}`)
         const data = fs.readFileSync(this.filename)
@@ -20,7 +22,10 @@ class Libreria {
     }
 
     find(id) {
-        return this.list.find((obj) => obj.id == id)
+        try {return this.list.find((obj) => obj.id == id)}
+        catch(e){
+            
+        }
     }
 
     static id = 0
@@ -37,6 +42,15 @@ class Libreria {
         this.list[index] = obj;
 
         return obj;
+    }
+
+    delete(id) {
+        let objetoBorrar = this.list.find((obj) => obj.id == id)
+        if (objetoBorrar) {
+            console.log(objetoBorrar)
+            this.list = this.list.filter(obj => obj.id != id);
+        }
+
     }
 }
 
